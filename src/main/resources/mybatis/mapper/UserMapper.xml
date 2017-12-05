@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cailu.springboot.mapper.IUserMapper">
+	<resultMap id="BaseResultMap" type="com.cailu.springboot.entity.User">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="user_sex" property="userSex" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+		<result column="is_super" property="isSuper" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="userColumns">
+		u.id,
+		u.username,
+		u.password,
+		u.user_sex,
+		u.age,
+		u.is_super,
+		u.token,
+		u.name,
+		u.create_time,
+		u.update_time
+	</sql>
+
+
+	<select id="getUserList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="userColumns" />
+		FROM user u
+	</select>
+
+
+	<select id="getUserLogin" resultMap="BaseResultMap">
+		SELECT
+		<include refid="userColumns" />
+		FROM user u
+		<where>
+			u.username=#{username} and u.password=#{password}
+		</where>
+	</select>
+	<select id="findByUsername" resultMap="BaseResultMap">
+		SELECT
+		<include refid="userColumns" />
+		FROM user u
+		<where>
+			u.username=#{username}
+		</where>
+	</select>
+	
+	<select id="getUserById" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		SELECT * FROM user u
+		WHERE u.id = #{id}
+	</select>
+
+	<insert id="insert" >
+		insert into user
+		(username,
+		password,
+		user_sex,
+		age,
+		is_super,
+		token,
+		name,
+		create_time,
+		update_time)
+		values(
+		#{username},
+		#{password},
+		#{userSex},
+		#{age},
+		#{isSuper},
+		#{token},
+		#{name},
+		now(),
+		now()
+		)
+	</insert>
+
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cailu.springboot.mapper.IMoudleMapper">
+	<resultMap id="MoudleResultMap" type="com.cailu.springboot.entity.Moudle">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="INTEGER" />
+		<result column="update_user" property="updateUser" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="update_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="project_id" property="projectId" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="moudleColumns">
+		m.id ,
+		m.name,
+		m.description,
+		m.create_user,
+		m.update_user,
+		m.create_time,
+		m.update_time,
+		m.project_id
+	</sql>
+
+
+	<select id="getMoudleList" resultMap="MoudleResultMap">
+		SELECT
+		<include refid="moudleColumns" />
+		FROM api_moudle m
+		<where>
+			m.project_id=#{projectId}
+		</where>
+	</select>
+
+
+
+	<select id="getMoudleById" parameterType="INTEGER" resultMap="MoudleResultMap">
+		SELECT * FROM api_moudle m
+		WHERE m.id = #{id}
+	</select>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO api_moudle(
+		name,
+		description,
+		create_user,
+		update_user,
+		create_time,
+		update_time,
+		project_id
+		) VALUES (
+		#{name},
+		#{description},
+		#{createUser},
+		#{updateUser},
+		now(),
+		now(),
+		#{projectId}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE api_moudle
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="updateUser!=null and updateUser!=''">
+				update_user=#{updateUser},
+			</if>
+			update_time=now()
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from api_moudle where id=#{id}
+	</delete>
+</mapper>

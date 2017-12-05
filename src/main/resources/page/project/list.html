@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title> 项目列表</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight blog">
+        <div class="row">
+       <!--  <div th:each="pro : ${proList}">
+        	<div class="ibox-content">
+                        <a href="/index/indexv" class="btn-link">
+                            <h2 th:text="${pro.name}"></h2>
+                        </a>
+                      
+                        <p th:text="${pro.description}">                  
+						</p>
+                    </div>
+        </div> -->
+       <div class="col-sm-12">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>所有项目</h5>
+                                <div class="ibox-tools">
+                                    <a href="/project/add" class="btn btn-primary btn-xs">创建新项目</a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="project-list">
+                                    <table class="table table-hover">
+                                        <tbody th:each="pro : ${proList}">
+                                            <tr>
+                                                <td class="project-title">
+                                                    <a th:href="@{/index/(projectId=${pro.id},projectName=${pro.name})}"><span th:text="${pro.name}"></span></a>
+                                                    <br>
+                                                    <small>创建于 <span th:text="${pro.createTime}"></span></small>
+                                                </td>
+                                                <td class="project-people">
+                                                    <span th:test="${pro.description}" ></span>
+                                                </td>
+                                                <td class="project-actions">
+                                                    <a th:href="@{/project/detail(id=${pro.id})}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 编辑 </a>
+                                                    <a th:href="@{/project/del(id=${pro.id})}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> 删除 </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="/js/content.js?v=1.0.0"></script>
+
+
+    
+    
+
+</body>
+
+</html>

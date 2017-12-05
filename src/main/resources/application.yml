@@ -1,0 +1,59 @@
+spring:
+ # mvc:
+ #   view:
+ #     prefix: /WEB-INF/jsp/
+ #     suffix: .jsp
+ #     http:  
+ #       encoding.charset: UTF-8  
+ #        encoding.enable: true  
+ #       encoding.force: true 
+#  velocity:
+#    resourceLoaderPath: /WEB-INF/views/
+#    properties:
+#      userdirective: com.baidu.fis.velocity.directive.Html, com.baidu.fis.velocity.directive.Head,
+#        com.baidu.fis.velocity.directive.Body, com.baidu.fis.velocity.directive.Require,
+#        com.baidu.fis.velocity.directive.Script, com.baidu.fis.velocity.directive.Style,
+#        com.baidu.fis.velocity.directive.Uri, com.baidu.fis.velocity.directive.Widget,
+#        com.baidu.fis.velocity.directive.Block, com.baidu.fis.velocity.directive.Extends,
+#        com.baidu.fis.velocity.directive.Parent, com.baidu.fis.velocity.directive.Filter
+#      input.encoding: UTF-8
+#      output.encoding: UTF-8
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    sqlScriptEncoding: UTF-8
+  thymeleaf:
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    prefix: classpath:/page/
+    suffix: .html
+
+#---------------------------------
+
+#shiro:
+#  realm: com.boya.demo.config.ShiroDbRealm
+#  loginUrl: /login
+#  successUrl: /
+#  unauthorizedUrl: /login
+ # filterChainDefinitions:
+#    "/favicon.ico": anon
+#    "/login": authc
+#    "/logout": logout
+ #   "/static/**": anon
+ #   "/**": authc
+
+#---------------------------------
+    
+mybatis: 
+  config: classpath:/mybatis/mybatis-config.xml
+  mapperLocations: classpath:/mybatis/mapper/*.xml
+#logging:
+#	    config: classpath:logback-spring.xml
+
+#---------------------------------
+
+#logging: 
+#  file: D:/Dev/logs/demo.log
+ # level: DEBUG

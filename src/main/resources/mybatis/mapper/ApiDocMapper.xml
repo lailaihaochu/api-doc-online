@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cailu.springboot.mapper.IApiDocMapper">
+	<resultMap id="ApiDocResultMap" type="com.cailu.springboot.entity.ApiDoc">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="param_in" property="paramIn" jdbcType="VARCHAR" />
+		<result column="param_out" property="paramOut" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="request" property="request" jdbcType="VARCHAR" />
+		<result column="create_user" property="createUser" jdbcType="INTEGER" />
+		<result column="update_user" property="updateUser" jdbcType="INTEGER" />
+		<result column="moudle_id" property="moudleId" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="update_time" property="createTime" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<sql id="apiDocColumns">
+		ac.id ,
+		ac.title ,
+		ac.param_in,
+		ac.param_out,
+		ac.description,
+		ac.request,
+		ac.create_user,
+		ac.update_user,
+		ac.moudle_id,
+		ac.create_time,
+		ac.update_time
+	</sql>
+
+
+	<select id="getApiDocList" resultMap="ApiDocResultMap">
+		SELECT
+		<include refid="apiDocColumns" />
+		FROM api_cotent ac
+		<where>
+
+		</where>
+	</select>
+
+
+
+	<select id="getApiDocById" parameterType="INTEGER" resultMap="ApiDocResultMap">
+		SELECT * FROM api_cotent ac
+		WHERE ac.id = #{id}
+	</select>
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO api_cotent(
+		title ,
+		param_in,
+		param_out,
+		description,
+		request,
+		create_user,
+		update_user,
+		moudle_id,
+		create_time,
+		update_time
+		) VALUES (
+		#{title},
+		#{paramIn},
+		#{paramOut},
+		#{description},
+		#{request},
+		#{createUser},
+		#{updateUser},
+		#{moudleId},
+		now(),
+		now()
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE api_cotent
+		<set>
+			<if test="title!=null and title!=''">
+				title=#{title},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="request!=null and request!=''">
+				request=#{request},
+			</if>
+			<if test="paramOut!=null and paramOut!=''">
+				param_out=#{paramOut},
+			</if>
+			<if test="paramIn!=null and paramIn!=''">
+				param_in=#{paramIn},
+			</if>
+			<if test="updateUser!=null and updateUser!=''">
+				update_user=#{updateUser},
+			</if>
+			update_time=now()
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from api_cotent where id=#{id}
+	</delete>
+
+
+</mapper>
