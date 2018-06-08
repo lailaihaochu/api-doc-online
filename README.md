@@ -8,3 +8,11 @@
 数据库mysql
 
 基于springboot使用
+
+需要安装redis
+
+redis作用是账户登录判断
+
+
+
+
